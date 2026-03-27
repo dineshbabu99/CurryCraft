@@ -13,6 +13,7 @@ type Meal = {
   strMeal: string;
   strMealThumb: string;
   strInstructions: string;
+  strCategory: string;
 };
 
 type Category = {
