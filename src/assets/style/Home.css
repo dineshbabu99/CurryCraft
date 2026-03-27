@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+.home {
+  background: url('../assets/hero.png') no-repeat center;
+  background-size: cover;
+}
+
+.home-title {
+  font-size: 32px;
+  color: var(--text-h);
+  margin-top: 30px;
+  text-align: center;
+}
+.home-description {
+  font-size: 18px;
+  color: var(--text);
+  margin-top: 16px;
+}
+
+.home-category {
+@apply text-gray-500 italic  p-1 rounded w-max mx-auto mt-4 p-2 cursor-pointer transition-colors duration-300;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

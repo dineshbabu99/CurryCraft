@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.food-card {
+  @apply bg-white rounded-lg shadow-md p-4 w-64 transition-all duration-300 hover:scale-105 hover:shadow-xl;
+}
+.food-card:hover {
+  @apply shadow-lg;
+}
+.food-image {
+  @apply w-full h-48 object-cover rounded-t-lg;
+}
+.food-name {
+  @apply text-lg font-bold mt-4 text-red-500 ;
+}
+.food-description {
+  @apply text-gray-600 mt-2;
+}
+
+.food-category {
+  @apply text-gray-500 mt-1 italic bg-green-100 p-1 rounded;
+}
