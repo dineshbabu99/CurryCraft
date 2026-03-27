@@ -1,4 +1,4 @@
-import React, { useState, type ReactNode } from 'react';
+import React, { useEffect, useState, type ReactNode } from 'react';
 import '../assets/style/Foodcard.css';
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +26,6 @@ const saveFavorites = (ids: string[]) => {
 
 
 
-
 const HeartIcon: React.FC<HeartIconProps> = ({ filled, onClick }) => {
   return (
     <svg
@@ -49,29 +48,29 @@ const HeartIcon: React.FC<HeartIconProps> = ({ filled, onClick }) => {
 
 const FoodCard = ({ meal }: { meal: Meal }) => {
   const navigate = useNavigate();
-  const [isFav, setIsFav] = useState(false);
+const [isFav, setIsFav] = useState(() =>
+  getFavorites().includes(meal.idMeal)
+);
 
   const handleClick = () => {
     navigate(`/recipe/${meal.idMeal}`);
   };
 
- const handleFavClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+const handleFavClick = (e: React.MouseEvent) => {
+  e.stopPropagation();
 
-    const favs = getFavorites();
+  const favs = getFavorites();
+  let updatedFavs: string[];
 
-    let updatedFavs;
+  if (favs.includes(meal.idMeal)) {
+    updatedFavs = favs.filter(id => id !== meal.idMeal);
+  } else {
+    updatedFavs = [...favs, meal.idMeal];
+  }
 
-    if (favs.includes(meal.idMeal)) {
-      updatedFavs = favs.filter((id) => id !== meal.idMeal);
-      setIsFav(false);
-    } else {
-      updatedFavs = [...favs, meal.idMeal];
-      setIsFav(true);
-    }
-
-    saveFavorites(updatedFavs);
-  };
+  saveFavorites(updatedFavs);
+  setIsFav(updatedFavs.includes(meal.idMeal));
+};
 
   return (
     <div className="food-card relative" onClick={handleClick}>
