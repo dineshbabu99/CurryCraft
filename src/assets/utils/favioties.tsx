@@ -1,5 +1,10 @@
-import React from "react";
-
+ type Meal = {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+  strInstructions: string;
+  strCategory: string;
+};
 
 export const getFavorites = (): Meal[] => {
   const favs = localStorage.getItem("favorites");

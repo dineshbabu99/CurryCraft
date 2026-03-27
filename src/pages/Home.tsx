@@ -150,7 +150,7 @@ useEffect(() => {
         if (activeCategory.includes("Favorites")) {
 const favs = getFavorites();
 
-return favs.includes(meal.idMeal);  
+return favs?.includes(meal.idMeal);  
       }
 
         return activeCategory.includes(meal.strCategory || "");
