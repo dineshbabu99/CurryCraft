@@ -1,9 +1,8 @@
 import axios from 'axios';
 import '../assets/style/Home.css';
 import FoodCard from '../compoments/FoodCard';
-import React, {useState, useEffect} from 'react';
-import {categoriesUrl,searchByNameUrl, filterByCategoryUrl} from '../assets/api/Urls';
-import {fetchFoodData} from '../assets/api/apis';
+import  {useState, useEffect} from 'react';
+import {searchByNameUrl, filterByCategoryUrl} from '../assets/api/Urls';
 import { getFavorites } from '../assets/utils/favioties';
 
 
@@ -26,7 +25,6 @@ const [foodList, setFoodList] = useState<Meal[]>([]);
 const [loading, setLoading] = useState(false);
 const [categories, setCategories] = useState<Category[]>([]);
 const [activeCategory, setActiveCategory] = useState<string[]>([]);
-const [favorites, setFavorites] = useState<Meal[]>([]);
 
 
 useEffect(() => {
