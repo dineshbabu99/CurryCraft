@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type ReactNode } from 'react';
+import React, {  useState, type ReactNode } from 'react';
 import '../assets/style/Foodcard.css';
 import { useNavigate } from "react-router-dom";
 

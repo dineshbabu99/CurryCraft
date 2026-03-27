@@ -1,10 +1,3 @@
- type Meal = {
-  idMeal: string;
-  strMeal: string;
-  strMealThumb: string;
-  strInstructions: string;
-  strCategory: string;
-};
 
 export const getFavorites = (): string[] => {
   const favs = localStorage.getItem("favorites");
