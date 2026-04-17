@@ -75,57 +75,79 @@ const Recipe: React.FC = () => {
     }
   }
 
+const getYoutubeThumbnail = (url?: string) => {
+  if (!url) return "";
+
+  try {
+    const videoId = new URL(url).searchParams.get("v");
+    return videoId
+      ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+      : "";
+  } catch {
+    return "";
+  }
+};
+
   return (
-    <div className="max-w-3xl mx-auto p-6">
+  <div className="recipe-container">
 
-      {/* 🔙 Back button */}
-      <button
-        onClick={() => navigate(-1)}
-        className="mb-4 text-blue-500"
-      >
-        ← Back
-      </button>
+    <button onClick={() => navigate(-1)} className="back-btn">
+      ← Back
+    </button>
 
-      <div className="Recipe-card">
+    <div className="recipe-card">
 
-        <h3 className="Recipe-name">{meal.strMeal}</h3>
-
+      <div className="recipe-image-wrapper">
         <img
           src={meal.strMealThumb}
           alt={meal.strMeal}
-          className="w-full h-80 object-cover rounded-lg mb-4"
+          className="recipe-image"
         />
+        <div className="recipe-overlay">
+          <h1>{meal.strMeal}</h1>
+          <p>{meal.strCategory}</p>
+        </div>
+      </div>
 
-        <p className="Recipe-category">
-          <span className="font-semibold">Category:</span> {meal.strCategory}
+      <div className="recipe-content">
+
+        <p className="recipe-description">
+          {meal.strInstructions.slice(0, 180)}...
         </p>
 
-        <p className="Recipe-description mt-3">
-          {meal.strInstructions.slice(0, 150)}...
-        </p>
-
-        {/* 🧾 Ingredients */}
-        <p className="Recipe-ingredients font-bold mt-4">Ingredients</p>
-
-        <ul className="list-disc pl-6">
-          {ingredients.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-
-        {/* 📜 Instructions */}
-        <p className="Recipe-instructions mt-4">
-          {meal.strInstructions}
-        </p>
-
-        <div className="Recipe-actions mt-4">
-          <button className="Recipe-button">Save Recipe</button>
-          {/* <button className="Recipe-button">Share Recipe</button> */}
+        <div className="section">
+          <h3>🧾 Ingredients</h3>
+          <ul>
+            {ingredients.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
         </div>
 
+        <div className="section">
+          <h3>📜 Instructions</h3>
+          <p>{meal.strInstructions}</p>
+        </div>
+
+<div className="section">
+  <h3>📜 YouTube</h3>
+
+  {meal.strYoutube ? (
+    <div
+      className="youtube-preview"
+      onClick={() => window.open(meal.strYoutube, "_blank")}
+    >
+      <img src={getYoutubeThumbnail(meal.strYoutube)} />
+      <div className="play-button">▶</div>
+    </div>
+  ) : (
+    <p>No video available</p>
+  )}
+</div>
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Recipe;

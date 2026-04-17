@@ -1,6 +1,7 @@
-import React, {  useState, type ReactNode } from 'react';
+import React, {  useEffect, useState, type ReactNode } from 'react';
 import '../assets/style/Foodcard.css';
 import { useNavigate } from "react-router-dom";
+import { isFavorite, toggleFavorite } from '../assets/utils/favioties';
 
 type Meal = {
   strCategory: ReactNode;
@@ -14,16 +15,6 @@ type HeartIconProps = {
   filled: boolean;
   onClick?: (e: React.MouseEvent) => void;
 };
-
-
-const getFavorites = (): string[] => {
-  return JSON.parse(localStorage.getItem("favorites") || "[]");
-};
-
-const saveFavorites = (ids: string[]) => {
-  localStorage.setItem("favorites", JSON.stringify(ids));
-};
-
 
 
 const HeartIcon: React.FC<HeartIconProps> = ({ filled, onClick }) => {
@@ -46,11 +37,16 @@ const HeartIcon: React.FC<HeartIconProps> = ({ filled, onClick }) => {
   );
 };
 
+
+
+
 const FoodCard = ({ meal }: { meal: Meal }) => {
   const navigate = useNavigate();
-const [isFav, setIsFav] = useState(() =>
-  getFavorites().includes(meal.idMeal)
-);
+const [isFav, setIsFav] = useState((false));
+
+useEffect(() => {
+  setIsFav(isFavorite(meal.idMeal));
+}, [meal.idMeal]);
 
   const handleClick = () => {
     navigate(`/recipe/${meal.idMeal}`);
@@ -58,18 +54,8 @@ const [isFav, setIsFav] = useState(() =>
 
 const handleFavClick = (e: React.MouseEvent) => {
   e.stopPropagation();
-
-  const favs = getFavorites();
-  let updatedFavs: string[];
-
-  if (favs.includes(meal.idMeal)) {
-    updatedFavs = favs.filter(id => id !== meal.idMeal);
-  } else {
-    updatedFavs = [...favs, meal.idMeal];
-  }
-
-  saveFavorites(updatedFavs);
-  setIsFav(updatedFavs.includes(meal.idMeal));
+  const updated = toggleFavorite(meal.idMeal);
+  setIsFav(updated);
 };
 
   return (
@@ -89,7 +75,7 @@ const handleFavClick = (e: React.MouseEvent) => {
   <div className="flex items-center justify-between">
     <h3 className="food-name">{meal.strMeal}</h3>
 
-    {/* veg / non-veg icon */}
+    {}
     <span className="text-lg">
       {meal.strCategory === "Vegetarian" ? "" : ""}
     </span>
@@ -102,5 +88,9 @@ const handleFavClick = (e: React.MouseEvent) => {
     </div>
   );
 };
+
+
+
+
 
 export default FoodCard;

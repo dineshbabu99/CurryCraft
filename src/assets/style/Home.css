@@ -1,30 +1,88 @@
 @import "tailwindcss";
 
-.home {
-  background: url('../assets/hero.png') no-repeat center;
-  background-size: cover;
+.home-container {
+  max-width: 100%;
+  margin: auto;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .home-title {
-  font-size: 32px;
-  color: var(--text-h);
-  margin-top: 30px;
-  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
 }
-.home-description {
-  font-size: 18px;
-  color: var(--text);
-  margin-top: 16px;
+
+.categories {
+  margin: 20px;
 }
+
 
 .home-category {
-@apply text-gray-500 italic  p-1 rounded w-max mx-auto mt-4 p-2 cursor-pointer transition-colors duration-300;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  background: #e5e7eb;
+  transition: all 0.25s ease;
+  margin-bottom: 15px;
+  
 }
 
-.scrollbar-hide::-webkit-scrollbar {
+.home-category:hover {
+  transform: scale(1.08);
+  background: #d1d5db;
+}
+
+.home-category.bg-green-200 {
+  background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+  color: white;
+  box-shadow: 0 4px 10px rgba(34,197,94,0.3);
+}
+
+.categories div::-webkit-scrollbar {
   display: none;
 }
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 20px;
+}
+
+.empty-text {
+  margin-top: 20px;
+  color: #666;
+  text-align: center;
+}
+
+.nav-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-bar button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #2c1b0f;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-bar button:hover {
+  background: #e85d4a;
+  transform: translateY(-1px);
+}
+
+.nav-bar button.active {
+  background: linear-gradient(135deg, #ff7a18, #ff3d00);
+  box-shadow: 0 4px 10px rgba(255, 61, 0, 0.4);
 }

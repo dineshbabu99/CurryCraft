@@ -1,21 +1,72 @@
 @import "tailwindcss";
 
 .food-card {
-  @apply bg-white rounded-lg shadow-md p-4 w-64 transition-all duration-300 hover:scale-105 hover:shadow-xl;
-}
-.food-card:hover {
-  @apply shadow-lg;
-}
-.food-image {
-  @apply w-full h-48 object-cover rounded-t-lg;
-}
-.food-name {
-  @apply text-lg font-bold mt-4 text-red-500 ;
-}
-.food-description {
-  @apply text-gray-600 mt-2;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.food-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+
+.food-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+
+.fav-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  padding: 6px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+
+.food-info {
+  padding: 12px 14px;
+}
+
+
+.food-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.food-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+.food-type {
+  font-size: 18px;
+  margin-left: 8px;
+}
+
+
 .food-category {
-  @apply text-gray-500 mt-1 italic bg-green-100 p-1 rounded;
+  font-size: 13px;
+  color: #777;
+  margin-top: 6px;
 }
